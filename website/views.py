@@ -49,7 +49,10 @@ def telechargements(request):
 
 def deletePesee(request, pesee_id):
 
-    Pesee.objects.get(id=pesee_id).delete()
+    peseeToDelete = Pesee.objects.get(id=pesee_id)
+    print(str(peseeToDelete.fichier.path))
+    os.remove(peseeToDelete.fichier.path)
+    peseeToDelete.delete()
     return redirect("/telechargements")
 
 

@@ -49,6 +49,7 @@ class Pesee(models.Model):
 
         Poids.objects.all().delete()
         self.fichier.save(self.genererNomFichier(), File(fic))
+        os.remove(path)
 
         fic.close()
 
