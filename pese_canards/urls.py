@@ -20,5 +20,6 @@ import website
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('website.urls'))
+    path('', include('website.urls')),
+    path('api/', include('backend.urls')),
 ]

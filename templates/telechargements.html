@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Téléchargements{% endblock %}
+{% block content %}
+    <div class="container">
+        <h1>Téléchargements</h1>
+
+        <table class="table table-striped">
+            <tr>
+                <th>Pesée</th>
+                <th>Semaine</th>
+                <th>Date Début</th>
+                <th>Date Fin</th>
+                <th>Téléchargement</th>
+                <th>Supression</th>
+            </tr>
+
+            {% for pesee in pesees %}
+                <tr>
+                    <td>{{ pesee.id }}</td>
+                    <td>{{ pesee.semaine }}</td>
+                    <td>{{ pesee.date_debut }}</td>
+                    <td>{{ pesee.date_fin }}</td>
+                    <td><a class="glyphicon glyphicon-download btn btn-primary" href="pesee/{{ pesee.id }}/fichier"> </a></td>
+                    <td><a class="glyphicon glyphicon-trash btn btn-danger" href="/pesee/{{ pesee.id }}/delete"> </a></td>
+                </tr>
+            {% endfor %}
+        </table>
+
+    </div>
+{% endblock %}

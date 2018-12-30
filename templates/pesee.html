@@ -2,40 +2,51 @@
 {% block title %}Pesée{% endblock %}
 
 {% block content %}
+    {% if pesage == False %}
+        <div class="container">
+            <h1>Lancer une pesée</h1>
+            <form action="/pesee/start" method="post">{% csrf_token %}
+                <div class="form-group">
+                    <label for="poids_min">Poids minimum (g)</label>
+                    <input type="number" class="form-control" name="poids_min" id="poids_min">
+                </div>
 
-    <div class="container">
-        <form action="/pesee">
-            <div class="form-group">
-                <label for="poids_min">Poids minimum (g)</label>
-                <input type="number" class="form-control" name="poids_min" id="poids_min">
-            </div>
+                <div class="form-group">
+                    <label for="poids_max">Poids Maximum (g)</label>
+                    <input type="number" class="form-control" name="poids_max" d="poids_max">
+                </div>
 
-            <div class="form-group">
-                <label for="poids_max">Poids Maximum (g)</label>
-                <input type="number" class="form-control" name="poids_max" d="poids_max">
-            </div>
+                <div class="form-group">
+                    <label for="poids_max">Tare (g)</label>
+                    <input type="number" class="form-control" name="tare" id="tare">
+                </div>
 
-            <div class="form-group">
-                <label for="poids_max">Tare (g)</label>
-                <input type="number" class="form-control" name="tare" id="tare">
-            </div>
+                <div class="form-group">
+                    <label for="semaine">Semaine</label>
+                    <select class="form-control" id="semaine" name="semaine">
+                        <option >1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option>
+                        <option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option>
+                    </select>
+                </div>
 
-            <div class="form-group">
-                <label for="semaine">Semaine</label>
-                <select class="form-control" id="semaine" name="semaine">
-                    <option >1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option>
-                    <option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <input type="submit" value="Démarrer la Pesée">
-            </div>
+                <div class="form-group">
+                    <input class="btn btn-success" type="submit" value="Démarrer la Pesée">
+                </div>
 
 
-        </form>
+            </form>
 
-    </div>
+        </div>
+    {% endif %}
+    {% if pesage == True %}
+        <div class="container">
+            <h1>Votre pesée est en cours...</h1>
+
+            <a class="btn btn-danger" href="/pesee/stop">Arrêter la pesée</a>
+
+        </div>
+    {% endif %}
+
 
 
 {% endblock %}
