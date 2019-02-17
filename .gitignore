@@ -6,8 +6,15 @@ __pycache__/
 # C extensions
 *.so
 
+#Custom ignores
+.idea/
+venv/
+pese_canards.iml
+
 # Distribution / packaging
 .Python
+pese_canard.iml
+
 build/
 develop-eggs/
 dist/

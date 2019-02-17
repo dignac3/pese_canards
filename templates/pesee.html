@@ -17,7 +17,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="poids_max">Tare (g)</label>
+                    <label for="poids_max">Poids Zéro (g)</label>
                     <input type="number" class="form-control" name="tare" id="tare">
                 </div>
 
@@ -40,7 +40,7 @@
     {% endif %}
     {% if pesage == True %}
         <div class="container">
-            <h1>Votre pesée est en cours...</h1>
+            <h1>la pesée {{ pesee_id }} est en cours...</h1>
 
             <a class="btn btn-danger" href="/pesee/stop">Arrêter la pesée</a>
 

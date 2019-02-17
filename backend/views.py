@@ -1,21 +1,20 @@
 import json
 
 from django.http import HttpResponse
-from django.shortcuts import render
-
 # Create your views here.
-from django.views.decorators.csrf import csrf_protect, csrf_exempt
+from django.views.decorators.csrf import csrf_exempt
 
-from backend.forms import PoidsForm
-from backend.models import Poids
+from website.models import Pesage
+from website.models import Poids
 
 
 @csrf_exempt
 def ajouterPoids(request):
     received_json_data = json.loads(request.body)
 
-    poidsRecu= Poids(poids=received_json_data['poids'])
 
-    poidsRecu.save()
+    if Pesage.isStarted():
+        poids_recup= Poids(poids=received_json_data['poids'],pesee_id=Pesage.peseeId)
+        poids_recup.save()
 
     return HttpResponse()
