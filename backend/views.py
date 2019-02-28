@@ -10,7 +10,7 @@ from website.models import Poids
 
 @csrf_exempt
 def ajouterPoids(request):
-    received_json_data = json.loads(request.body)
+    received_json_data = json.loads(request.body.decode('utf-8'))
 
     print("Pesage sans id")
     if Pesage.isStarted():
