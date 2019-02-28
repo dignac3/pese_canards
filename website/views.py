@@ -20,6 +20,8 @@ def pesee(request):
     if lastPesee != None:
         #TODO Faire une page dédiée
         if not Pesage.isStarted() and not lastPesee.estTerminee() :
+            Pesage.peseeId = lastPesee.id
+            Pesage._started = True
             return render(request,
                   'pesee.html',
                   {"pesage": not Pesage.isStarted(),
@@ -80,6 +82,7 @@ def downloadFile(request,pesee_id):
     if liste_poids.count() > 0:
         for poids in liste_poids:
             writer.writerow([poids.poids, poids.date.strftime("%d/%m/%Y %H:%M:%S")])
+
 
 
     return response
