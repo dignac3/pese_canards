@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Relancer une Pesée{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>La Pesée {{ pesee_id }} s'est arrétée. Voulez vous la relancer ?</h1>
+
+        <div class="row">
+            <a class="btn btn-danger col-xs-5 col-md-5" href="/pesee/cancel">Annuler</a>
+            <span class="col-xs-2"></span>
+            <a class="btn btn-success col-xs-5 col-md-5 " href="/pesee/restart">Relancer</a>
+        </div>
+    </div>
+
+{% endblock %}

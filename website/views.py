@@ -15,22 +15,28 @@ def index(request):
 
 def pesee(request):
 
-    lastPesee = Pesee.getDernierePesee()
-
-    if lastPesee != None:
+    if not Pesee.estVide():
         #TODO Faire une page dédiée
+        #S'il existe des pesées
+        lastPesee = Pesee.getDernierePesee()
         if not Pesage.isStarted() and not lastPesee.estTerminee() :
-            Pesage.peseeId = lastPesee.id
-            Pesage._started = True
-            return render(request,
-                  'pesee.html',
-                  {"pesage": not Pesage.isStarted(),
-                   "pesee_id":lastPesee.id})
+            # S'il n'y a pas de Pesée en cours mais que la dernière pesée ne s'est pas terminé
 
+            #Actuellement on relance sur la dernière Pesée et la page de gestion va la supprimer si besoin
+            #Pesage.start(lastPesee)
+
+            #On va renvoyer vers la page de gestions
+            return render(
+                request,
+                'restarting.html',
+                {
+                    "pesee_id": lastPesee.id
+                }
+            )
 
     return render(request,
                   'pesee.html',
-                  {"pesage": Pesage.isStarted(),
+                  {"pesage_started": Pesage.isStarted(),
                    "pesee_id":Pesage.peseeId})
 
 
@@ -46,26 +52,34 @@ def startPesee(request):
 
         return redirect("/pesee", pesage=Pesage.isStarted(), pesee_id=Pesage.peseeId)
 
+def restartPesee(request):
+    pesee = Pesee.getDernierePesee()
+    Pesage.restart(pesee)
 
+    return redirect("/pesee", pesage=Pesage.isStarted(), pesee_id=Pesage.peseeId)
+
+def cancelPesee(request):
+    peseeToStop = Pesee.getDernierePesee()
+    peseeToStop.finDePesee()
+    Pesage.stop()
+    return redirect("/telechargements")
 def stopPesee(request):
 
     peseeToStop = Pesee.objects.get(id=Pesage.peseeId)
     peseeToStop.finDePesee()
     Pesage.stop()
-
-
     return redirect("/telechargements")
 
 
 def telechargements(request):
     return render(request, "telechargements.html",{"pesees": Pesee.objects.exclude(date_fin=None)})
 
-
 def deletePesee(request, pesee_id):
 
     Pesee.objects.get(id=pesee_id).delete()
 
     return redirect("/telechargements")
+
 
 def downloadFile(request,pesee_id):
     pesee = Pesee.objects.get(id = pesee_id)

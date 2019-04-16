@@ -4,18 +4,19 @@
     <div class="container">
         <h1>Téléchargements</h1>
 
-        <table class="table table-striped">
+        <div class="table-responsive">
+            <table class="table table-striped ">
             <tr>
-                <th>Pesée</th>
-                <th>Semaine</th>
-                <th>Date Début</th>
-                <th>Date Fin</th>
-                <th>Téléchargement</th>
-                <th>Supression</th>
+                <th scope="col">Pesée</th>
+                <th scope="col">Semaine</th>
+                <th scope="col">Date Début</th>
+                <th scope="col">Date Fin</th>
+                <th scope="col">Téléchargement</th>
+                <th scope="col">Supression</th>
             </tr>
 
             {% for pesee in pesees %}
-                <tr>
+                <tr scope="row">
                     <td>{{ pesee.id }}</td>
                     <td>{{ pesee.semaine }}</td>
                     <td>{{ pesee.date_debut }}</td>
@@ -25,6 +26,7 @@
                 </tr>
             {% endfor %}
         </table>
+        </div>
 
     </div>
 {% endblock %}

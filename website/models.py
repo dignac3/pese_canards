@@ -2,6 +2,7 @@ import csv
 import datetime
 import json
 import os
+from os.path import exists
 
 from django.core.files import File
 from django.db import models
@@ -28,6 +29,13 @@ class Pesee(models.Model):
     def getDernierePesee(self):
         return Pesee.objects.last()
 
+    @classmethod
+    def estVide(self):
+        if len(Pesee.objects.all()) > 0:
+            return False
+        else:
+            return True
+
     def estTerminee(self):
         if self.date_fin == None:
             return False
@@ -45,14 +53,13 @@ class Poids(models.Model):
 
 
 class Pesage:
-    _started = False
+    _started: bool = False
     peseeId=None
 
     @classmethod
     def start(self,pesee):
         self._started = True
         self.peseeId = pesee.id
-
 
         #TODO make a class for config the file
         payload = {
@@ -65,17 +72,17 @@ class Pesage:
 
         config_pesee.close()
 
-
     @classmethod
     def stop(self):
 
         self._started = False
         self.peseeId = None
 
-
-
     @classmethod
     def isStarted(self):
         return self._started
 
-
+    @classmethod
+    def restart(self, pesee):
+        self._started = True
+        self.peseeId = pesee.id

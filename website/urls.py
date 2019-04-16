@@ -3,8 +3,8 @@ from django.urls import path
 from website import views
 
 urlpatterns = [
-    path('', views.index),
-    path('index', views.index,name="accueil"),
+    path('', views.pesee),
+    path('index', views.pesee,name="accueil"),
 
     path('telechargements',views.telechargements, name="telechargements"),
 
@@ -14,5 +14,9 @@ urlpatterns = [
     path('pesee/stop',views.stopPesee, name="stop_pesee"),
     path('pesee/<int:pesee_id>/delete',views.deletePesee),
     path('pesee/<int:pesee_id>/fichier',views.downloadFile),
+    path('pesee/restart', views.restartPesee),
+    path('pesee/cancel', views.cancelPesee),
+
+
 
 ]
