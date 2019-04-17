@@ -53,7 +53,7 @@ class Poids(models.Model):
 
 
 class Pesage:
-    _started: bool = False
+    _started = False
     peseeId=None
 
     @classmethod
