@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'f7hcln(i#&a*u^(dwi7xib5!-wt^5ze(*r62v#@@@)w3dtr+*7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     '0.0.0.0',
@@ -33,7 +33,8 @@ ALLOWED_HOSTS = [
     'pese-canards.com',
     '192.168.0.13',
     '109.8.92.61',
-    '10.3.141.1'
+    '10.3.141.1',
+    '86.239.3.116'
 ]
 
 
