@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <title>{% block title %} Accueil {% endblock %}</title>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'website/css/bootstrap.css' %}" >
+    <script src="{% static 'website/js/bootstrap.js' %}"></script>
 
 </head>
 <body>
@@ -22,7 +24,7 @@
       </div>
     </nav>
     {% endblock %}
-        
+
     {% block content %}
         <div class="container">
             <h1>Bienvenue !</h1>
